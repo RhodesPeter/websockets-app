@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -49,6 +50,7 @@ body {
   margin-bottom: 24px;
   margin-left: 12px;
   margin-right: 12px;
+  padding-bottom: 35px;
   position: relative;
   width: 400px;
 }
@@ -76,8 +78,7 @@ body {
 .chat__messages {
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 100%;
 }
 

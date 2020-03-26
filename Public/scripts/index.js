@@ -12,14 +12,18 @@ document.querySelector('form').addEventListener('submit', function (e) {
 });
 
 socket.on('chat message', function (msg) {
-  var liElement = document.createElement('li')
+  var liElement = document.createElement('li');
+  var messageContainer = document.querySelector('.chat__messages');
+
   liElement.textContent = msg;
 
-  document.querySelector('.chat__messages').append(liElement);
+  messageContainer.append(liElement);
+  messageContainer.scrollTop = messageContainer.scrollHeight;
 });
 
 socket.on('connected users', function (users) {
   var usersList = document.querySelector('.chat__users-list');
+
   usersList.innerHTML = '';
 
   users.forEach(user => {
