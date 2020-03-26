@@ -10,13 +10,25 @@ body {
 
 .chat {
   display: flex;
-  margin: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 24px;
+
+  /*
+    @media only screen and (min-width: 600px) {
+      body {
+        background-color: lightblue;
+      }
+    }
+  */
 }
 
 .chat__users {
   width: 200px;
   border: 2px solid black;
   min-height: 140px;
+  margin-left: 12px;
+  margin-right: 12px;
   height: 100%;
   padding: 8px;
 }
@@ -34,7 +46,9 @@ body {
 .chat__message-container {
   border: 2px solid black;
   height: 500px;
-  margin-right: 24px;
+  margin-bottom: 24px;
+  margin-left: 12px;
+  margin-right: 12px;
   position: relative;
   width: 400px;
 }
