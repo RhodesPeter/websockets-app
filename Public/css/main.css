@@ -14,14 +14,6 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   padding: 24px;
-
-  /*
-    @media only screen and (min-width: 600px) {
-      body {
-        background-color: lightblue;
-      }
-    }
-  */
 }
 
 .chat__users {

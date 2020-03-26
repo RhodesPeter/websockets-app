@@ -1,7 +1,7 @@
 const sockets = (io) => {
   io.on('connection', function (socket) {
     console.log('a user connected');
-    io.emit('chat message', 'A new user has joined the chat');
+    io.emit('chat message', '* A new user has joined the chat *');
 
     socket.on('chat message', function (msg) {
       console.log('message: ' + msg);
@@ -14,7 +14,7 @@ const sockets = (io) => {
 
     socket.on('disconnect', function () {
       console.log('a user disconnected');
-      io.emit('chat message', 'A user has left the chat');
+      io.emit('chat message', '* A user has left the chat *');
 
       emitUpdateUsersEvent(io);
     });
