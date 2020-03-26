@@ -15,12 +15,6 @@ io.on('connection', function (socket) {
   console.log('a user connected');
   io.emit('chat message', 'A new user has joined the chat');
 
-  // This '/' path is the path of the page with the websockets connection on
-  io.of('/').clients((error, clients) => {
-    if (error) throw error;
-    console.log(clients);
-  });
-
   socket.on('chat message', function (msg) {
     console.log('message: ' + msg);
 
@@ -28,11 +22,24 @@ io.on('connection', function (socket) {
     io.emit('chat message', msg);
   });
 
+  emitUpdateUsersEvent();
+
   socket.on('disconnect', function () {
     console.log('a user disconnected');
     io.emit('chat message', 'A user has left the chat');
+
+    emitUpdateUsersEvent();
   });
 });
+
+const emitUpdateUsersEvent = () => {
+  // This '/' path is the path of the page with the websockets connection on
+  io.of('/').clients((error, clients) => {
+    if (error) throw error;
+    console.log(clients);
+    io.emit('connected users', clients);
+  });
+};
 
 http.listen(port, function () {
   console.log(`listening on port ${port}`);

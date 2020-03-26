@@ -17,3 +17,15 @@ socket.on('chat message', function (msg) {
 
   document.querySelector('.chat__messages').append(liElement);
 });
+
+socket.on('connected users', function (users) {
+  var usersList = document.querySelector('.chat__users-list');
+  usersList.innerHTML = '';
+
+  users.forEach(user => {
+    var liElement = document.createElement('li');
+    liElement.classList.add('chat__user-list-item');
+    liElement.textContent = user;
+    usersList.append(liElement);
+  });
+});
