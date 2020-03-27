@@ -15,7 +15,7 @@ socket.on('chat message', function (msg) {
   var liElement = document.createElement('li');
   var messageContainer = document.querySelector('.chat__messages');
 
-  liElement.textContent = msg;
+  liElement.textContent = `${!!msg.username ? `${msg.username}: ` : ''}${msg.message}`;
 
   messageContainer.append(liElement);
   messageContainer.scrollTop = messageContainer.scrollHeight;

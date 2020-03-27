@@ -3,20 +3,23 @@ const users = [];
 const sockets = (io) => {
   io.on('connection', function (socket) {
     console.log('a user connected');
-    io.emit('chat message', '* A new user has joined the chat *');
+    io.emit('chat message', { message: '* A new user has joined the chat *' });
 
     socket.on('chat message', function (msg) {
       console.log('message: ' + msg);
 
       // This will emit the event to all connected sockets
-      io.emit('chat message', msg);
+      io.emit('chat message', {
+        message: msg,
+        username: socket.nickname || 'Guest'
+      });
     });
 
     emitUpdateUsersEvent(io);
 
     socket.on('disconnect', function () {
       console.log('a user disconnected');
-      io.emit('chat message', '* A user has left the chat *');
+      io.emit('chat message', { message: '* A user has left the chat *' });
 
       emitUpdateUsersEvent(io);
     });
@@ -38,7 +41,7 @@ const emitUpdateUsersEvent = (io) => {
 
     const usernames = Object
       .keys(allUsers)
-      .map(key => allUsers[key].nickname || allUsers[key].id);
+      .map(key => allUsers[key].nickname || `Guest: ${allUsers[key].id}`);
 
     io.emit('connected users', usernames);
   });
