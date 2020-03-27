@@ -17,12 +17,12 @@ body {
 }
 
 .chat__users {
-  width: 200px;
+  width: 250px;
   border: 2px solid black;
   min-height: 140px;
   margin-left: 12px;
   margin-right: 12px;
-  height: 100%;
+  margin-bottom: 24px;
   padding: 8px;
 }
 
@@ -67,6 +67,10 @@ body {
   width: 80px;
 }
 
+.chat__btn--username {
+  width: 96px;
+}
+
 .chat__messages {
   list-style-type: none;
   margin: 0;
@@ -80,4 +84,20 @@ body {
 
 .chat__messages li:nth-child(odd) {
   background: #eee;
+}
+
+.chat__username {
+  width: 250px;
+  border: 2px solid black;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-bottom: 24px;
+  position: relative;
+  display: flex;
+}
+
+.chat__username-input {
+  border: 0;
+  flex: 1;
+  padding: 10px;
 }

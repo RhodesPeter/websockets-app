@@ -1,6 +1,6 @@
 var socket = io();
 
-document.querySelector('form').addEventListener('submit', function (e) {
+document.querySelector('.chat__form').addEventListener('submit', function (e) {
   e.preventDefault(); // prevents page reloading
   var textInput = document.querySelector('.chat__text-input');
 
@@ -32,4 +32,17 @@ socket.on('connected users', function (users) {
     liElement.textContent = user;
     usersList.append(liElement);
   });
+});
+
+document.querySelector('.chat__username').addEventListener('submit', function (e) {
+  e.preventDefault(); // prevents page reloading
+
+  console.log('username submitted');
+
+  var usernameInput = document.querySelector('.chat__username-input');
+
+  if (usernameInput.value.length > 0) {
+    socket.emit('add username', usernameInput.value);
+    usernameInput.value = '';
+  }
 });

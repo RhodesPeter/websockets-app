@@ -1,3 +1,5 @@
+const users = [];
+
 const sockets = (io) => {
   io.on('connection', function (socket) {
     console.log('a user connected');
@@ -18,14 +20,27 @@ const sockets = (io) => {
 
       emitUpdateUsersEvent(io);
     });
+
+    socket.on('add username', function (username) {
+      socket.nickname = username;
+      emitUpdateUsersEvent(io);
+    });
   });
 }
 
+// Passes socket nickname or id if no nickname set.
 const emitUpdateUsersEvent = (io) => {
   // This '/' path is the path of the page with the websockets connection on
   io.of('/').clients((error, clients) => {
     if (error) throw error;
-    io.emit('connected users', clients);
+
+    const allUsers = io.sockets.sockets;
+
+    const usernames = Object
+      .keys(allUsers)
+      .map(key => allUsers[key].nickname || allUsers[key].id);
+
+    io.emit('connected users', usernames);
   });
 };
 
